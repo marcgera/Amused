@@ -1,0 +1,154 @@
+#wrapper {
+  margin-right: auto;
+  /* 1 */
+  margin-left: auto;
+  /* 1 */
+  max-width: 960px;
+  /* 2 */
+  padding-right: 10px;
+  /* 3 */
+  padding-left: 10px;
+  /* 3 */
+  position: relative;
+}
+
+body {
+  font-family: "Helvetica", Sans-Serif;
+}
+
+#filters {
+  width: 800;
+  min-height: 100px;
+  overflow: hidden;
+  padding: 10px;
+  background-color: #eeeeee;
+  margin-top: 10px;
+}
+
+#playlist {
+  width: 800;
+  min-height: 100px;
+  overflow: hidden;
+  padding: 10px;
+  position: relative;
+  background-color: #eeeeee;
+  margin-top: 10px;
+}
+
+#mediaDiv {
+  width: 800;
+  height: 140;
+  min-height: 100px;
+  padding: 10px;
+  overflow: hidden;
+  position: relative;
+  background-color: #eeeeee;
+  margin-top: 10px;
+}
+
+.filterDiv {
+  padding: 10px;
+  float: left;
+  overflow: hidden;
+  min-width: 100px;
+  display: inline-block;
+  min-height: 50px;
+  margin-top: 10px;
+}
+
+.SegmentTitle {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.ListBox {
+  display: block;
+  padding-right: 10px;
+}
+
+#playlists {
+  width: 150px;
+}
+
+#add2playlist {
+  position: absolute;
+  top: 120px;
+}
+
+#playListItemControl {
+  width: 120px;
+  height: 300px;
+  position: absolute;
+  top: 100px;
+}
+
+#playListControl {
+  width: 120px;
+  height: 300px;
+  position: absolute;
+  top: 100px;
+}
+
+.playListButtons {
+  width: 95px;
+  margin-top: 5px;
+}
+
+#playlists {
+  width: 200px;
+  height: 160px;
+}
+
+#playlistitems {
+  width: 400px;
+  height: 160px;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  padding-top: 100px;
+  /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: black;
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+/*# sourceMappingURL=formStyle.css.map */

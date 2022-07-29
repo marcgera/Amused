@@ -1,0 +1,53 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Amused - Player</title>
+  <meta name="description" content="Amused project - Player">
+  <meta name="author" content="SitePoint">
+
+  <meta property="og:title" content="Amused project - Player">
+  <meta property="og:type" content="website">
+  <meta property="og:description" content="Amused project - Player">
+  <meta property="og:image" content="image.png">
+
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="static/css/player.css?v=1.0">
+
+</head>
+
+<body>
+  <!-- your content here... -->
+  <script src="../static/js/player.js"></script>
+
+    <button id="play">Play</button>
+    <button id="stop">Stop</button>
+
+
+    <p id ='videoDuration'>Video duration 1 and 2: </p>
+
+    <p id ='videoTimePassed'>Current second audio 2:</p>
+
+    <p id ='currentTimeAudio1'>Current second audio 1:</p>
+    <p id ='currentTimeAudio2'>Current second audio 2:</p>
+    <p id ='currentTimeVideo1'>Current second video 1:</p>
+    <p id ='currentTimeVideo2'>Current second video 2:</p>
+    <p id ='currentVolume1'>Current Volume audio 1:</p>
+    <p id ='currentVolume2'>Fadevolume: </p>
+
+    <video id = 'video1' width="640" height="480"  controls>
+
+    Your browser does not support the video tag.
+    </video>
+    <video id = 'video2' width="640" height="480" controls>
+
+      Your browser does not support the video tag.
+      </video>
+
+</body>
+</html>

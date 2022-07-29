@@ -1,0 +1,158 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Playlist editor</title>
+  <meta name="description" content="Therapist playlist editor.">
+  <meta name="author" content="SitePoint">
+
+  <meta property="og:title" content="Therapist">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="localhost">
+  <meta property="og:description" content="Therapist side amused playlist editor">
+  <meta property="og:image" content="image.png">
+
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <link rel="stylesheet" href="static/css/formStyle.css?v=1.0">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <meta name="mobile-web-app-capable" content="yes">
+  <script src="../static/js/therapist.js"></script>
+
+</head>
+
+<body>
+  <!-- your content here... -->
+
+  <div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p>Enter new playlist name..</p>
+      <input type="text" id="playlist_name">
+      <button id="addPlaylist2">OK</button>
+      <br>
+    </div>
+  </div>
+
+  <div id="ModalEdit" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p>Edit playlist name..</p>
+      <input type="text" id="playlist_name_edit">
+      <button id="editPlaylistName">OK</button>
+      <br>
+    </div>
+  </div>
+
+
+  <div id="wrapper">
+
+    <div id="playlist">
+      <div class="SegmentTitle">Playlist</div>
+      <div class="filterDiv">
+        Playlists
+        <div class="ListBox">
+          <select Name="Playlists" ID="playlists" Size="10"></select>
+        </div>
+      </div>
+
+      <div class="filterDiv">
+        <div id="playListControl">
+          <button id="addPlaylist" title="Add playlist" class="playListButtons">Add</button>
+          <button id="removePlaylist" title="Remove playlist" class="playListButtons" disabled>Remove</button>
+          <button id="editPlaylist" title="Edit name" class="playListButtons" disabled>Edit name</button>
+        </div>
+      </div>
+
+
+
+
+    </div>
+
+
+    <div id="filters">
+      <div class="SegmentTitle">Filters</div>
+      <div class="filterDiv">
+        type
+        <div class="ListBox">
+          <select Name="Categories" ID="categories" Size="7" style="width:200px;"></select>
+        </div>
+      </div>
+      <div class="filterDiv">
+        Level
+        <div class="ListBox">
+          <select Name="Levels" ID="levels" Size="5" style="width:80px;"></select>
+        </div>
+      </div>
+      <div class="filterDiv">
+        Background
+        <div class="ListBox">
+          <select Name="Backgrounds" ID="backgrounds" Size="5" style="width:100px;"></select>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div id="mediaDiv">
+      <div class="SegmentTitle">Video</div>
+      <div class="filterDiv">
+        Movies
+        <div class="ListBox">
+          <select Name="Videos" ID="videos" Size="10" style="width:200px;"></select>
+        </div>
+      </div>
+      <button id="addVideo2playlist" style="margin-top:100px;" disabled>Add to playlist</button>
+      <div class="filterDiv" style="position:absolute; left:370px;">
+        Selected videos
+        <div class="ListBox">
+          <select Name="selectedVideos" ID="selectedVideos" Size="10" style="width:450px;"></select>
+        </div>
+      </div>
+
+      <button id="VideoUp" title="Add playlist" style='position: absolute; top:100px;left:850px;width: 50px;' disabled>↑</button>
+      <button id="VideoDown" title="Add playlist" style='position: absolute; top:130px;left:850px;width: 50px;' disabled>↓</button>
+
+
+
+    </div>
+
+
+
+    <div id="mediaDiv">
+      <div class="SegmentTitle">Music</div>
+      <div class="filterDiv">
+        Music
+        <div class="ListBox">
+          <select Name="Music" ID="music" Size="10" style="width:200px;"></select>
+        </div>
+      </div>
+      <button id="addMusic2playlist" style="margin-top:100px;" disabled>Add to playlist</button>
+      <div class="filterDiv" style="position:absolute; left:370px;">
+        Selected Music
+        <div class="ListBox">
+          <select Name="selectedMusic" ID="selectedMusic" Size="10" style="width:450px;"></select>
+        </div>
+      </div>
+
+      <button id="MusicUp" title="Add playlist" style='position: absolute; top:100px;left:850px;width: 50px;' disabled>↑</button>
+      <button id="MusicDown" title="Add playlist" style='position: absolute; top:130px;left:850px;width: 50px;' disabled>↓</button>
+
+    </div>
+
+
+  </div>
+
+</body>
+
+</html>
