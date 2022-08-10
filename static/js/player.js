@@ -26,8 +26,6 @@ $(document).ready(function () {
     g_video1 = $('#video1')[0];
     g_video2 = $('#video2')[0];
 
-
-
     g_video1.addEventListener('loadedmetadata', function () {
         g_Duration1 = g_video1.duration.toFixed(2);
         updateDurationDiv();

@@ -88,6 +88,7 @@ def getPlaylistItems2():
     global playlist_ID
     return json.dumps(db.getPlaylistItems(playlist_ID))
 
+
 @app.route('/movePlayListItemUp', methods=['GET'])
 def movePlayListItemUp():
     playlistItem_ID= request.args.get('playlistitem_ID')
@@ -107,8 +108,6 @@ def movePlayListItem():
     tableName = request.args.get('tableName')
     db.movePlaylistitem(playlistItem_ID, tableName, direction)
     return 'http200OK'
-
-
 
 @app.route('/add2PlaylistItems', methods=['GET'])
 def add2PlaylistItems():
@@ -132,7 +131,15 @@ def addVideo2PlaylistItems():
     db.addVideo2PlaylistItems(playlist_ID, video_ID)
     return 'http200OK'
 
-@app.route('/addPlaylist', methods = ['GET'])
+@app.route('/removeFromPlaylist', methods=['GET'])
+def removeFromPlaylist():
+    playlist_item_ID = request.args.get('playlist_item_ID')
+    table_name = request.args.get('table_name')
+    db.removeFromPlayList(playlist_item_ID, table_name)
+    return 'http200OK'
+
+
+@app.route('/addPlaylist', methods=['GET'])
 def addPlaylist():
     playlist_name = request.args.get('playlist_name')
     db.addPlayList(user_ID, playlist_name)

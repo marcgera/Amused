@@ -207,9 +207,8 @@ class AmusedDB(object):
         self.execute(sql_string)
         return 'http200OK'
 
-    def removeFromPlayList(self, playlistItem_ID):
-        conn = sqlite3.connect(self.db_full_f_name)
-        sql_string = 'DELETE FROM playlist_items WHERE ID = ' + str(playlistItem_ID)
+    def removeFromPlayList(self, playlist_Item_ID, table_name):
+        sql_string = 'DELETE FROM ' + table_name + ' WHERE ID = ' + str(playlist_Item_ID)
         self.execute(sql_string)
         return 'http200OK'
 
@@ -338,15 +337,18 @@ class AmusedDB(object):
         c.execute(sql_string)
         data = c.fetchone()
         sort_order_orig = data[0]
-        sql_string = "SELECT " + tableName + "_sort_order, ID  FROM " + tableName + " WHERE " + tableName + "_sort_order " + compSign + " " + \
+        sql_string = "SELECT " + tableName + "_sort_order, ID  FROM " + tableName + " WHERE " + tableName +\
+                     "_sort_order " + compSign + " " + \
                      str(sort_order_orig) + " ORDER BY " + tableName + "_sort_order " + sortDir + " LIMIT 1"
         c.execute(sql_string)
         data = c.fetchone()
         sort_order_other = data[0]
         id_other = data[1]
-        sql_string = "UPDATE " + tableName + " SET " + tableName + "_sort_order=" + str(sort_order_other) + " WHERE ID=" + str(itemID)
+        sql_string = "UPDATE " + tableName + " SET " + tableName + "_sort_order=" + str(sort_order_other) +\
+                     " WHERE ID=" + str(itemID)
         self.execute(sql_string)
-        sql_string = "UPDATE " + tableName + " SET " + tableName + "_sort_order=" + str(sort_order_orig) + " WHERE ID=" + str(id_other)
+        sql_string = "UPDATE " + tableName + " SET " + tableName + "_sort_order=" + str(sort_order_orig) +\
+                     " WHERE ID=" + str(id_other)
         self.execute(sql_string)
         conn.close()
 

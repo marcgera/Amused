@@ -51,7 +51,7 @@
       <input type="text" id="playlist_name_edit">
       <button id="editPlaylistName">OK</button>
       <br>
-    </div>
+    </div>removePlaylist
   </div>
 
 
@@ -71,6 +71,9 @@
           <button id="addPlaylist" title="Add playlist" class="playListButtons">Add</button>
           <button id="removePlaylist" title="Remove playlist" class="playListButtons" disabled>Remove</button>
           <button id="editPlaylist" title="Edit name" class="playListButtons" disabled>Edit name</button>
+        </div>
+        <div id="playListControl" style ="left: 500px;">
+          <button id="play" title="play playlist" class="playListButtons" disabled>Play</button>
         </div>
       </div>
 
@@ -116,12 +119,14 @@
       <div class="filterDiv" style="position:absolute; left:370px;">
         Selected videos
         <div class="ListBox">
-          <select Name="selectedVideos" ID="selectedVideos" Size="10" style="width:450px;"></select>
+          <select Name="selectedVideos" ID="selectedVideos" Size="10" style="width:450px;font-family: 'Courier New', Courier, 
+          monospace; white-space: pre-line;font-size: 11px;"></select>
         </div>
       </div>
 
-      <button id="VideoUp" title="Add playlist" style='position: absolute; top:100px;left:850px;width: 50px;' disabled>↑</button>
-      <button id="VideoDown" title="Add playlist" style='position: absolute; top:130px;left:850px;width: 50px;' disabled>↓</button>
+      <button id="VideoUp" title="Up" style='position: absolute; top:100px;left:850px;width: 50px;' disabled>↑</button>
+      <button id="VideoDown" title="Down" style='position: absolute; top:130px;left:850px;width: 50px;' disabled>↓</button>
+      <button id="VideoRemove" title="Remove" style='position: absolute; top:160px;left:850px;width: 50px;' disabled>X</button>
 
 
 
@@ -141,12 +146,14 @@
       <div class="filterDiv" style="position:absolute; left:370px;">
         Selected Music
         <div class="ListBox">
-          <select Name="selectedMusic" ID="selectedMusic" Size="10" style="width:450px;"></select>
+          <select Name="selectedMusic" ID="selectedMusic" Size="10" style="width:450px;font-family: 'Courier New', Courier, 
+          monospace; white-space: pre-line;font-size: 11px;"></select>
         </div>
       </div>
 
-      <button id="MusicUp" title="Add playlist" style='position: absolute; top:100px;left:850px;width: 50px;' disabled>↑</button>
-      <button id="MusicDown" title="Add playlist" style='position: absolute; top:130px;left:850px;width: 50px;' disabled>↓</button>
+      <button id="MusicUp" title="Up" style='position: absolute; top:100px;left:850px;width: 50px;' disabled>↑</button>
+      <button id="MusicDown" title="Down" style='position: absolute; top:130px;left:850px;width: 50px;' disabled>↓</button>
+      <button id="MusicRemove" title="Remove" style='position: absolute; top:160px;left:850px;width: 50px;' disabled>X</button>
 
     </div>
 

@@ -11,7 +11,7 @@ var g_playlistitemsVideo
 var g_categorie = 0;
 var g_level = 0;
 var g_background = 0;
-var g_video = 0;
+var g_selectedVideo= 0;
 var g_selectedMusic = 0;
 var g_playlist = 0;
 var g_playlistitemMusic = 0;
@@ -86,7 +86,7 @@ $(document).ready(function () {
     });
 
     $('#videos').on('change', function () {
-        g_video = g_videos[this.selectedIndex];
+        g_selectedVideo= g_videos[this.selectedIndex];
         doCheck();
     });
 
@@ -120,12 +120,24 @@ $(document).ready(function () {
         doMovePlayListItem('playlist_videos', 'down');
     })
 
+    $('#VideoRemove').on('click', function () {
+        doRemovePlayListItem('playlist_videos', g_playlistitemVideo);
+    })
+
     $('#MusicUp').on('click', function () {
         doMovePlayListItem('playlist_music', 'up');
     })
 
     $('#MusicDown').on('click', function () {
         doMovePlayListItem('playlist_music', 'down');
+    })
+
+    $('#MusicRemove').on('click', function () {
+        doRemovePlayListItem('playlist_music', g_playlistitemMusic);
+    })
+
+    $('#play').on('click', function () {
+        window.open("http://127.0.0.1:81/playlist?playlist_ID=7");
     })
 
     $('#playlists').on('change', function () {
@@ -162,10 +174,12 @@ $(document).ready(function () {
         if (index > -1) {
             $('#VideoUp').prop('disabled', false);
             $('#VideoDown').prop('disabled', false);
+            $('#VideoRemove').prop('disabled', false);
         }
         else {
             $('#VideoUp').prop('disabled', true);
             $('#VideoDown').prop('disabled', true);
+            $('#VideoRemove').prop('disabled', true);
         }
 
         if (g_playlistitemsVideo.length == 1) {
@@ -191,13 +205,15 @@ $(document).ready(function () {
         if (index > -1) {
             $('#MusicUp').prop('disabled', false);
             $('#MusicDown').prop('disabled', false);
+            $('#MusicRemove').prop('disabled', false);
         }
         else {
             $('#MusicUp').prop('disabled', true);
             $('#MusicDown').prop('disabled', true);
+            $('#MusicRemove').prop('disabled', true);
         }
 
-        if (g_playlistitemMusic.length == 1) {
+        if (g_playlistitemsMusic.length == 1) {
             $('#MusicUp').prop('disabled', true);
             $('#MusicDown').prop('disabled', true);
         }
@@ -206,7 +222,7 @@ $(document).ready(function () {
             $('#MusicUp').prop('disabled', true);
         }
 
-        if (index == g_playlistitemMusic.length - 1) {
+        if (index == g_playlistitemsMusic.length - 1) {
             $('#MusicDown').prop('disabled', true);
         }
     }
@@ -268,14 +284,13 @@ $(document).ready(function () {
         CheckEnabledStatusOfAddButtons();
     }
 
-
     function CheckEnabledStatusOfAddButtons(){
 
-        if(g_categorie  && g_level && g_background && g_playlist && g_video){
+        if(g_selectedVideo){
             $('#addVideo2playlist').removeAttr('disabled');
         } 
 
-        if(g_categorie  && g_level && g_background && g_playlist && g_music){
+        if(g_selectedMusic){
             $('#addMusic2playlist').removeAttr('disabled');
         } 
     }
@@ -307,9 +322,12 @@ $(document).ready(function () {
             g_playlistitemsMusic = JSON.parse(data);
             $('#selectedMusic').empty();
             $.each(g_playlistitemsMusic, function (i, item) {
+                category = (item.categories_name + '..............').substring(0, 15) + '|';
+                duration = (item.music_duration + 'sec......').substring(0, 7)+ '|';
+                string2Display = (category  + ' ' + duration + ' '  + ' ' +  item.music_name).substring(0, 63);
                 $('#selectedMusic').append($('<option>', {
                     value: item.ID,
-                    text: item.categories_name + ' - ' + item.music_duration + 'sec - ' +  item.music_name 
+                    text: string2Display
                 }));
             });
             if (index > -1) {
@@ -318,6 +336,7 @@ $(document).ready(function () {
         });
         $('#removePlaylist').removeAttr('disabled');
         $('#editPlaylist').removeAttr('disabled');
+        $('#play').removeAttr('disabled');
     }
 
 
@@ -328,9 +347,14 @@ $(document).ready(function () {
             g_playlistitemsVideo = JSON.parse(data);
             $('#selectedVideos').empty();
             $.each(g_playlistitemsVideo, function (i, item) {
+                category = (item.categories_name + '..............').substring(0, 15) + '|';
+                duration = (item.videos_duration + 'sec......').substring(0, 7)+ '|';
+                bg = (item.backgrounds_name + '....').substring(0, 8)+ '|';
+                string2Display = (category  + ' ' + duration + ' '  + bg + ' ' +  item.videos_name).substring(0, 63);
                 $('#selectedVideos').append($('<option>', {
                     value: item.ID,
-                    text: item.categories_name + ' - ' + item.videos_duration + 'sec - ' + item.backgrounds_name + ' - ' +  item.videos_name 
+                    style: 'white-space: pre-line;',
+                    text:  string2Display
                 }));
             });
             if (index > -1) {
@@ -373,17 +397,7 @@ $(document).ready(function () {
         });
     }
 
-    function doMovePlayListItemUp() {
-        params = '?playlistitem_ID=' + g_playlistitem.pi_ID;
-        index = $('#playlistitems').prop('selectedIndex');
-        if (index < g_playlistitems.length) {
-            newIndex = index - 1;
-        }
 
-        $.get("/movePlayListItemUp" + params, function (data, status) {
-            doFillPlayListItems(newIndex);
-        });
-    }
 
     function doMovePlayListItem(tableName, direction) {
 
@@ -399,7 +413,7 @@ $(document).ready(function () {
             if (index < g_playlistitemsMusic.length) {
                 newIndex = index - 1;
             }   
-            arams = '?playlistitem_ID=' + g_playlistitemMusic.pm_ID;
+            params = '?playlistitem_ID=' + g_playlistitemMusic.pm_ID;
         }
         
         params = params + '&direction=' + direction;
@@ -418,21 +432,23 @@ $(document).ready(function () {
         });
     }
 
-
-
-    function doMovePlayListItemDown() {
-        params = '?playlistitem_ID=' + g_playlistitem.pi_ID;
-        index = $('#playlistitems').prop('selectedIndex');
-        if (index > 0) {
-            newIndex = index + 1;
+    function doRemovePlayListItem(table_name, plItem){
+        params = '?table_name=' + table_name;
+        if (table_name == 'playlist_videos'){
+            params = params + '&playlist_item_ID=' + plItem.pv_ID;
         }
-
-        $.get("/movePlayListItemDown" + params, function (data, status) {
-            doFillPlayListItems(newIndex);
+        else{
+            params = params + '&playlist_item_ID=' + plItem.pm_ID;
+        }
+        $.get("/removeFromPlaylist" + params, function (data, status) {
+            if (table_name == 'playlist_videos'){
+            doFillPlayListItemsVideo(g_playlist.ID);
+        }
+        else{
+            doFillPlayListItemsMusic(g_playlist.ID);
+        }
         });
     }
-
-
 
     function doAdd2MusicPlaylist() {
         params = '?playlist_ID=' + g_playlist.ID;
@@ -444,7 +460,7 @@ $(document).ready(function () {
 
     function doAdd2VideoPlaylist() {
         params = '?playlist_ID=' + g_playlist.ID;
-        params = params + '&video_ID=' + g_video.ID;
+        params = params + '&video_ID=' + g_selectedVideo.ID;
         $.get("/addVideo2PlaylistItems" + params, function (data, status) {
             doFillPlayListItemsVideo(g_playlist.ID);
         });
