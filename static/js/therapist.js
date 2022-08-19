@@ -346,9 +346,9 @@ $(document).ready(function () {
             g_playlistitemsVideo = JSON.parse(data);
             $('#selectedVideos').empty();
             $.each(g_playlistitemsVideo, function (i, item) {
-                category = (item.categories_name + '..............').substring(0, 15) + '|';
-                duration = (item.videos_duration + 'sec......').substring(0, 7)+ '|';
-                bg = (item.backgrounds_name + '....').substring(0, 8)+ '|';
+                category = (item.categories_name + '_____________').substring(0, 6) + '|';
+                duration = (item.videos_duration + 's_________').substring(0, 5)+ '|';
+                bg = (item.backgrounds_name + '_________').substring(0, 5)+ '|';
                 string2Display = (category  + ' ' + duration + ' '  + bg + ' ' +  item.videos_name).substring(0, 63);
                 $('#selectedVideos').append($('<option>', {
                     value: item.ID,
