@@ -333,24 +333,30 @@ class AmusedDB(object):
 
         conn = sqlite3.connect(self.db_full_f_name)
         c = conn.cursor()
-        sql_string = "SELECT " + tableName + "_sort_order FROM " + tableName + " WHERE ID=" + str(itemID)
+        sql_string = "SELECT " + tableName + "_sort_order, " + tableName + "_playlist_ID FROM " \
+                     + tableName + " WHERE ID=" + str(itemID)
         c.execute(sql_string)
         data = c.fetchone()
         sort_order_orig = data[0]
+        playlist_ID = data[1]
         sql_string = "SELECT " + tableName + "_sort_order, ID  FROM " + tableName + " WHERE " + tableName +\
                      "_sort_order " + compSign + " " + \
-                     str(sort_order_orig) + " ORDER BY " + tableName + "_sort_order " + sortDir + " LIMIT 1"
+                     str(sort_order_orig) + " AND " + tableName + "_playlist_ID=" + str(playlist_ID) + \
+                     " ORDER BY " + tableName + "_sort_order " + sortDir + " LIMIT 1"
+        print(sql_string)
         c.execute(sql_string)
         data = c.fetchone()
         sort_order_other = data[0]
         id_other = data[1]
+        conn.close()
         sql_string = "UPDATE " + tableName + " SET " + tableName + "_sort_order=" + str(sort_order_other) +\
                      " WHERE ID=" + str(itemID)
+
         self.execute(sql_string)
         sql_string = "UPDATE " + tableName + " SET " + tableName + "_sort_order=" + str(sort_order_orig) +\
                      " WHERE ID=" + str(id_other)
         self.execute(sql_string)
-        conn.close()
+
 
     def create_db(self):
         # ********************************************************
@@ -361,6 +367,7 @@ class AmusedDB(object):
                    "videos_category_SO INTEGER",
                    "videos_level_SO INTEGER",
                    "videos_background_SO INTEGER",
+                   "videos_description TEXT",
                    "videos_duration INTEGER"]
 
         self.insert_columns(table_name, columns)
@@ -369,9 +376,11 @@ class AmusedDB(object):
         table_name = 'music'
 
         self.create_table(table_name)
-        columns = ["music_name TEXT DEFAULT ''",
+        columns = ["music_filename TEXT DEFAULT ''",
                    "music_duration INTEGER",
                    "music_thumbnail TEXT",
+                   "music_artist TEXT",
+                   "music_name TEXT",
                    "music_category_SO integer"]
 
         self.insert_columns(table_name, columns)

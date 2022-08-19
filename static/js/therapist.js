@@ -137,7 +137,7 @@ $(document).ready(function () {
     })
 
     $('#play').on('click', function () {
-        window.open("http://127.0.0.1:81/playlist?playlist_ID=7");
+        window.open("http://127.0.0.1:81/playlist?playlist_ID=" + g_playlist.ID.toString());
     })
 
     $('#playlists').on('change', function () {
@@ -150,7 +150,6 @@ $(document).ready(function () {
         modal.style.display = "block";
         $('#playlist_name').focus();
     })
-
 
     $('#editPlaylist').on('click', function () {
         modalEdit.style.display = "block";
@@ -276,7 +275,7 @@ $(document).ready(function () {
             $.each(g_music, function (i, item) {
                 $('#music').append($('<option>', {
                     value: item.ID,
-                    text: item.music_name
+                    text: item.music_name + ' - ' + item.music_artist
                 }));
             });
         });
@@ -360,17 +359,15 @@ $(document).ready(function () {
             if (index > -1) {
                 $("#selectedVideos").prop('selectedIndex', index);
             }
+            $('#removePlaylist').removeAttr('disabled');
+            $('#editPlaylist').removeAttr('disabled');
+            CalculateVideos();
         });
-        $('#removePlaylist').removeAttr('disabled');
-        $('#editPlaylist').removeAttr('disabled');
     }
-
-
 
     function doCheck() {
         CheckEnabledStatusOfAddButtons()
     }
-
 
     function addPlayList() {
         params = '?playlist_name=' +document.getElementById("playlist_name").value;
@@ -397,10 +394,7 @@ $(document).ready(function () {
         });
     }
 
-
-
     function doMovePlayListItem(tableName, direction) {
-
 
         if (tableName == 'playlist_videos'){
             index = $('#selectedVideos').prop('selectedIndex');
@@ -423,7 +417,7 @@ $(document).ready(function () {
 
             if (tableName == 'playlist_videos'){
                 doFillPlayListItemsVideo();
-                $('#selectedVideos').selectedIndex = newIndex;
+                $('#selectedMusic').get(0).selectedIndex = newIndex;
             }
             else{
                 doFillPlayListItemsMusic();

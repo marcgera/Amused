@@ -15,7 +15,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return 'Web App with Python Flask!'
+    return 'Amused app. Use e.g. http://127.0.0.1:81/therapist?user_ID=1 for therapist screen'
 
 @app.route('/getCategories')
 def getCategories():
@@ -87,19 +87,6 @@ def getPlaylistItemsVideo():
 def getPlaylistItems2():
     global playlist_ID
     return json.dumps(db.getPlaylistItems(playlist_ID))
-
-
-@app.route('/movePlayListItemUp', methods=['GET'])
-def movePlayListItemUp():
-    playlistItem_ID= request.args.get('playlistitem_ID')
-    db.movePlaylistitemUp(playlistItem_ID)
-    return 'http200OK'
-
-@app.route('/movePlayListItemDown', methods=['GET'])
-def movePlayListItemDown():
-    playlistItem_ID= request.args.get('playlistitem_ID')
-    db.movePlaylistitemDown(playlistItem_ID)
-    return 'http200OK'
 
 @app.route('/movePlayListItem', methods=['GET'])
 def movePlayListItem():

@@ -109,7 +109,7 @@ $(document).ready(function () {
 
     setTimeout(function() {
         doPlay();
-      }, 2000);
+      }, 5000);
 
     tmr = setInterval(() => {
         if (!g_TransitionUngoing) {return}
