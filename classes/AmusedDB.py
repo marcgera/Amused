@@ -18,7 +18,7 @@ class AmusedDB(object):
         current_os = platform.system().lower()
 
         if current_os.lower() == "windows":
-            db_path = os.getcwd()  + os.path.sep + 'database' + os.path.sep
+            db_path = os.path.dirname(os.path.realpath(__file__)) + os.path.sep + '..' + os.path.sep + 'database' + os.path.sep
         else:
             #config.read('/var/www/webApp/webApp/mlconfig.ini')
             db_path = '/etc/amused/'
@@ -26,6 +26,8 @@ class AmusedDB(object):
         self.db_f_name = 'amusedDB'
         self.db_dir_name = db_path
         self.db_full_f_name = self.db_dir_name + self.db_f_name + '.db'
+        print('Database location:')
+        print(self.db_full_f_name)
         self.conn = sqlite3.connect(self.db_full_f_name)
 
 
@@ -200,6 +202,10 @@ class AmusedDB(object):
     def removePlayList(self, playlistID):
         sql_string = 'DELETE FROM playlists WHERE ID = ' + str(playlistID)
         self.execute(sql_string)
+        sql_string = 'DELETE FROM playlist_music WHERE playlist_music_playlist_ID = ' + str(playlistID)
+        self.execute(sql_string)
+        sql_string = 'DELETE FROM playlist_videos WHERE playlist_videos_playlist_ID = ' + str(playlistID)
+        self.execute(sql_string)
         return 'http200OK'
 
     def editPlayListName(self, playlistID, playlistName):
@@ -363,12 +369,13 @@ class AmusedDB(object):
         table_name = 'videos'
 
         self.create_table(table_name)
+
         columns = ["videos_name TEXT DEFAULT ''",
-                   "videos_category_SO INTEGER",
-                   "videos_level_SO INTEGER",
-                   "videos_background_SO INTEGER",
-                   "videos_description TEXT",
-                   "videos_duration INTEGER"]
+                    "videos_category_SO INTEGER",
+                    "videos_level_SO INTEGER",
+                    "videos_background_SO INTEGER",
+                    "videos_description TEXT",
+                    "videos_duration INTEGER"]
 
         self.insert_columns(table_name, columns)
 

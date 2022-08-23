@@ -204,7 +204,7 @@ function preLoadMedia() {
         plItemsMusic = loadPlayListMusic(plItemVideo.videos_category_SO);
         plItemMusic = plItemsMusic[0]
         srcVideo = '../static/video/' + plItemVideo.backgrounds_name + '/' + plItemVideo.videos_name;
-        srcAudio = '../static/music/' + plItemMusic.music_name;
+        srcAudio = '../static/music/' + plItemMusic.music_filename;
         g_audioElement1.setAttribute('src', srcAudio);
         g_video1.setAttribute('src', srcVideo);
 
@@ -217,7 +217,7 @@ function preLoadMedia() {
         if (plItemsMusic.length > 1) {
             g_currentPlaylistMusicItemIndex = g_currentPlaylistMusicItemIndex + 1;
             plItemMusic = plItemsMusic[g_currentPlaylistMusicItemIndex];
-            srcAudio = '../static/music/' + plItemMusic.music_name;
+            srcAudio = '../static/music/' + plItemMusic.music_filename;
             g_audioElement2.setAttribute('src', srcAudio);
         }
 
@@ -236,7 +236,7 @@ function playNextMusic(){
         g_currentPlaylistMusicItemIndex = g_currentPlaylistMusicItemIndex + 1;
     }
     plItemMusic = g_playListItemsMusic[g_currentPlaylistMusicItemIndex];
-    srcAudio = '../static/music/' + plItemMusic.music_name;
+    srcAudio = '../static/music/' + plItemMusic.music_filename;
 
     if (g_playingAudio1) {
         g_audioElement2.play();
@@ -263,16 +263,17 @@ function playNextVideo() {
     p_CurrentCategory = plItemVideo.videos_category_SO;
 
     if (g_PreviousCategory !== p_CurrentCategory){
+        g_PreviousCategory = p_CurrentCategory;
         g_audioElement1.pause;
         g_audioElement2.pause;
         plItemsMusic = loadPlayListMusic(p_CurrentCategory);
         plItemMusic = plItemsMusic[0];
         g_playingAudio1 = 1;
-        srcAudio = '../static/music/' + plItemMusic.music_name;
+        srcAudio = '../static/music/' + plItemMusic.music_filename;
         g_audioElement1.setAttribute('src', srcAudio);
         if (plItemsMusic.length > 1) {
             plItemMusic = plItemsMusic[1];
-            srcAudio = '../static/music/' + plItemMusic.music_name;
+            srcAudio = '../static/music/' + plItemMusic.music_filename;
             g_audioElement2.setAttribute('src', srcAudio);
         }
 

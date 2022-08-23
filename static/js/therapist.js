@@ -264,7 +264,7 @@ $(document).ready(function () {
             $.each(g_videos, function (i, item) {
                 $('#videos').append($('<option>', {
                     value: item.ID,
-                    text: item.videos_name
+                    text: item.videos_description
                 }));
             });
         });
@@ -349,7 +349,7 @@ $(document).ready(function () {
                 category = (item.categories_name + '_____________').substring(0, 6) + '|';
                 duration = (item.videos_duration + 's_________').substring(0, 5)+ '|';
                 bg = (item.backgrounds_name + '_________').substring(0, 5)+ '|';
-                string2Display = (category  + ' ' + duration + ' '  + bg + ' ' +  item.videos_name).substring(0, 63);
+                string2Display = (category  + ' ' + duration + ' '  + bg + ' ' +  item.videos_description).substring(0, 63);
                 $('#selectedVideos').append($('<option>', {
                     value: item.ID,
                     style: 'white-space: pre-line;',

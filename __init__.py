@@ -4,6 +4,15 @@ import json
 import platform
 import os
 
+print('')
+print(' **********************************************************')
+print(' *                                                        *')
+print(' *   Amused server - Marc Geraerts - August 2022 - V1.0   *')
+print(' *     Institute of Rehabilitation Science - UHasselt     *')
+print(' *                                                        *')
+print(' **********************************************************')
+print('')
+
 db = AmusedDB()
 db.create_db()
 db.populateDB()
@@ -12,6 +21,8 @@ global user_ID
 global playlist_ID
 
 app = Flask(__name__)
+
+
 
 @app.route('/')
 def index():
