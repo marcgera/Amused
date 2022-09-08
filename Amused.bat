@@ -1,0 +1,1 @@
+python "G:\My Drive\My Documents\PyCharmProjects\Amused\__init__.py"
