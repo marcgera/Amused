@@ -21,7 +21,7 @@ class AmusedDB(object):
             db_path = os.path.dirname(os.path.realpath(__file__)) + os.path.sep + '..' + os.path.sep + 'database' + os.path.sep
         else:
             #config.read('/var/www/webApp/webApp/mlconfig.ini')
-            db_path = '/etc/amused/'
+            db_path = '/usr/share/pyshared/amused/database/'
 
         self.db_f_name = 'amusedDB'
         self.db_dir_name = db_path
@@ -429,6 +429,7 @@ class AmusedDB(object):
         self.create_table(table_name)
         columns = ["user_name TEXT DEFAULT ''",
                    "user_surname TEXT DEFAULT ''",
+                   "user_email TEXT DEFAULT ''",
                    "user_password TEXT DEFAULT ''"]
 
         self.insert_columns(table_name, columns)

@@ -14,14 +14,17 @@ var g_VideoTimePassed1 = 0;
 var g_VideoTimePassed2 = 0;
 var g_playingVideo1 =1 ;
 var g_playingAudio1 =1 ;
-var g_fadeTime = 4000;
-var g_FadeTimerInterval = 100;
+var g_fadeTime = 6000;
+var g_FadeTimerInterval = 200;
 var g_TransitionUngoing = false;
 var g_FadeDelta;
+var g_PlayedMusic =[];
 
 
 g_audioElement1 = document.createElement('audio');
 g_audioElement2 = document.createElement('audio');
+g_audioElement1.volume = 1;
+g_audioElement2.volume = 1;
 var g_video1 = $('#video1')[0];
 var g_video2 = $('#video2')[0];
 
@@ -53,15 +56,10 @@ $(document).ready(function () {
         updateDurationDiv();
     }, false);
 
-
-
     g_video2.addEventListener('loadedmetadata', function () {
         g_VideoDuration2 = g_video2.duration.toFixed(2);
         updateDurationDiv();
     }, false);
-
-
-
 
     g_video1.addEventListener('ended', function () {
         playNextVideo();
@@ -115,7 +113,6 @@ $(document).ready(function () {
         if (!g_TransitionUngoing) {return}
         $("#currentVolume2").text('Fadevolume:' + g_fadeVolume.toString());
         currentAudio = getCurrentAudioElement();
-       
         currentAudio.volume = g_fadeVolume;
         g_fadeVolume = g_fadeVolume-g_FadeDelta;
     
@@ -149,9 +146,11 @@ function IsLastVideoInCategory(){
 
 function getCurrentAudioElement() {
     if (g_playingAudio1) {
+        $("#currentAudio").text('currentAudio: 1');
         return g_audioElement1;
     }
     else {
+        $("#currentAudio").text('currentAudio: 2');
         return g_audioElement2;
     }
 }
@@ -208,6 +207,8 @@ function preLoadMedia() {
         g_audioElement1.setAttribute('src', srcAudio);
         g_video1.setAttribute('src', srcVideo);
 
+        g_PlayedMusic.push(plItemMusic.ID);
+
         if (g_playListItemsVideo.length > 1) {
             plItemVideo = g_playListItemsVideo[1];
             srcVideo = '../static/video/' + plItemVideo.backgrounds_name + '/' + plItemVideo.videos_name;
@@ -237,14 +238,19 @@ function playNextMusic(){
     }
     plItemMusic = g_playListItemsMusic[g_currentPlaylistMusicItemIndex];
     srcAudio = '../static/music/' + plItemMusic.music_filename;
+    g_PlayedMusic.push(plItemMusic.ID);
 
     if (g_playingAudio1) {
+        g_audioElement1.pause();
         g_audioElement2.play();
         g_audioElement1.setAttribute('src',srcAudio);
+        g_playingAudio1 = 0;
     }
     else {
+        g_audioElement2.pause();
         g_audioElement1.play();
         g_audioElement2.setAttribute('src',srcAudio);
+        g_playingAudio1 = 1;
     }
 }
 
@@ -270,6 +276,7 @@ function playNextVideo() {
         plItemMusic = plItemsMusic[0];
         g_playingAudio1 = 1;
         srcAudio = '../static/music/' + plItemMusic.music_filename;
+        g_PlayedMusic.push(plItemMusic.ID);
         g_audioElement1.setAttribute('src', srcAudio);
         if (plItemsMusic.length > 1) {
             plItemMusic = plItemsMusic[1];

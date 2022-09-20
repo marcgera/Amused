@@ -1,13 +1,18 @@
-from flask import Flask,render_template, request
+from flask import Flask, render_template, request, Blueprint
 from classes.AmusedDB import AmusedDB
+from flask_cors import CORS, cross_origin
 import json
+from flask_bootstrap import Bootstrap
+
+
+
 import platform
 import os
 
 print('')
 print(' **********************************************************')
 print(' *                                                        *')
-print(' *   Amused server - Marc Geraerts - August 2022 - V1.0   *')
+print(' * Amused server - Marc Geraerts - September 2022 - V1.01 *')
 print(' *     Institute of Rehabilitation Science - UHasselt     *')
 print(' *                                                        *')
 print(' **********************************************************')
@@ -21,7 +26,9 @@ global user_ID
 global playlist_ID
 
 app = Flask(__name__)
-
+app.register_blueprint(auth)
+CORS(app)
+bootstrap = Bootstrap(app)
 
 
 @app.route('/')
@@ -63,6 +70,14 @@ def playlist():
     global playlist_ID
     playlist_ID= request.args.get('playlist_ID')
     return render_template('player.html')
+
+
+@app.route('/playerMSE', methods=['GET'])
+@cross_origin()
+def playerMSE():
+    global playlist_ID
+    playlist_ID= request.args.get('playlist_ID')
+    return render_template('playerMSE.html')
 
 @app.route('/getPlaylists')
 def getPlaylists():
