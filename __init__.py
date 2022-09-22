@@ -26,7 +26,6 @@ global user_ID
 global playlist_ID
 
 app = Flask(__name__)
-app.register_blueprint(auth)
 CORS(app)
 bootstrap = Bootstrap(app)
 
