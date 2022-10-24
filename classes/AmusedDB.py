@@ -486,6 +486,43 @@ class AmusedDB(object):
 
         self.insert_columns(table_name, columns)
 
+        # ********************************************************
+        table_name = 'log_exercise'
+        self.create_table(table_name)
+
+        columns = ["log_exercise_ts INTEGER DEFAULT -1",
+                   "log_exercise_ID text DEFAULT ''",
+                   "log_exercise_background_SO INTEGER DEFAULT -1",
+                   "log_exercise_level_SO text DEFAULT ''",
+                   "log_exercise_category text DEFAULT ''",
+                   "log_exercise_ID INTEGER DEFAULT -1"]
+
+        self.insert_columns(table_name, columns)
+
+        # ********************************************************
+        table_name = 'log_music'
+        self.create_table(table_name)
+
+        columns = ["log_music_ts INTEGER DEFAULT -1",
+                   "log_music_name text DEFAULT ''",
+                   "log_music_category text DEFAULT ''",
+                   "log_music_therapist_ID INTEGER DEFAULT -1"]
+
+
+        self.insert_columns(table_name, columns)
+
+        # ********************************************************
+        table_name = 'labels'
+
+        self.create_table(table_name)
+        columns = ["label_nl text DEFAULT ''",
+                   "label_nl text DEFAULT ''",
+                   ]
+
+        self.insert_columns(table_name, columns)
+
+
+
 
     def populateDB(self):
 
